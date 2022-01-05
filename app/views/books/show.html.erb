@@ -7,6 +7,7 @@
       <%= render 'form', book: Book.new %>
     </div>
     <div class='col-md-8 offset-md-1'>
+      
   		<h2>Book detail</h2>
   		<table class='table'>
   		  <tr id="book_<%= @book.id %>">
@@ -19,6 +20,7 @@
           <td><%= @book.body %></td>
           <td class="favorite-btn"><%= render "favorites/favorite-btn", book: @book %></td>
           <td class="comments-count">コメント数: <%= @book.book_comments.count %></td>
+           <td class="book-count">PV数: <%= @book.impressions_count %></td>
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
