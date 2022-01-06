@@ -5,11 +5,20 @@ class GroupsController < ApplicationController
   def index
     @book = Book.new
     @groups = Group.all
+    @user = current_user
   end
+  
+  def join
+    @group = Group.find(params[:group_id])
+    @group.users << current_user
+    redirect_to  groups_path
+  end
+
 
   def show
     @book = Book.new
     @group = Group.find(params[:id])
+    @user = current_user
   end
 
   def new
@@ -19,6 +28,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @group.users << current_user
     if @group.save
       redirect_to groups_path
     else
@@ -31,9 +41,10 @@ class GroupsController < ApplicationController
   
    def destroy
     @group = Group.find(params[:id])
-    @group.destroy
+    @group.users.delete(current_user)
     redirect_to groups_path
    end
+
 
   def update
     if @group.update(group_params)

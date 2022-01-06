@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   root :to => "homes#top"
   get "home/about" => "homes#about"
   get 'search' => "searchs#search"
-  resources :groups
+  
+  resources :groups do
+   get "join" =>"groups#join"
+  end
 
   resources :books, only: [:index, :show, :edit, :create, :destroy, :update] do
     resource :favorites, only: [:create, :destroy]
