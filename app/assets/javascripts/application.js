@@ -17,3 +17,5 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+window.jQuery = window.$ = require('jquery')
+require("../jquery_raty")
